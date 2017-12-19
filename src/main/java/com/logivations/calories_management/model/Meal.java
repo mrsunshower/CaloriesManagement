@@ -1,6 +1,8 @@
 package com.logivations.calories_management.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Created by KenTerror on 19.12.2017.
@@ -26,5 +28,13 @@ public class Meal {
 
     public int getCalories() {
         return calories;
+    }
+
+    public LocalDate getDate() {
+        return dateTime.toLocalDate();
+    }
+
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
     }
 }
