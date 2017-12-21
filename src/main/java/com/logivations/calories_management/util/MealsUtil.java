@@ -19,6 +19,12 @@ import static java.util.stream.Collectors.*;
  */
 public class MealsUtil {
     public static void main(String[] args) {
+        List<MealWithExceed> filteredMealWithExceed = initAndGetMealsWithExceed();
+
+        filteredMealWithExceed.forEach(System.out::println);
+    }
+
+    public static List<MealWithExceed> initAndGetMealsWithExceed() {
         List<Meal> meals = Arrays.asList(
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Сніданок", 500),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обід", 1000),
@@ -27,9 +33,7 @@ public class MealsUtil {
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обід", 500),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Вечеря", 510)
         );
-        List<MealWithExceed> filteredMealWithExceed = getFilteredMealWithExceed(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-
-        filteredMealWithExceed.forEach(System.out::println);
+        return getFilteredMealWithExceed(meals, LocalTime.MIN, LocalTime.MAX, 2000);
     }
 
     private static List<MealWithExceed> getFilteredMealWithExceed(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
@@ -41,7 +45,7 @@ public class MealsUtil {
     }
 
     private static boolean isExceed(Map<LocalDate, Integer> caloriesSumByDate, Meal meal, int caloriesPerDay) {
-        return caloriesSumByDate.get(meal.getDate()) > caloriesPerDay;
+        return caloriesSumByDate.getOrDefault(meal.getDate(), 0) > caloriesPerDay;
     }
 
     private static Predicate<Meal> isMealInTimeRange(LocalTime startTime, LocalTime endTime) {

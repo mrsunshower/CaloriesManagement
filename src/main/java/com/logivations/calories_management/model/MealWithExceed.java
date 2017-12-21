@@ -4,12 +4,12 @@ package com.logivations.calories_management.model;
  * Created by KenTerror on 19.12.2017.
  */
 public class MealWithExceed {
-    private Meal meal;
-    private boolean isExceed;
+    private final Meal meal;
+    private final boolean exceed;
 
-    public MealWithExceed(Meal meal, boolean isExceed) {
+    public MealWithExceed(Meal meal, boolean exceed) {
         this.meal = meal;
-        this.isExceed = isExceed;
+        this.exceed = exceed;
     }
 
     @Override
@@ -18,7 +18,15 @@ public class MealWithExceed {
                 "dateTime=" + meal.getDateTime() +
                 ", description='" + meal.getDescription() + '\'' +
                 ", calories=" + meal.getCalories() +
-                ", isExceed=" + isExceed +
+                ", isExceed=" + exceed +
                 '}';
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public boolean isExceed() {
+        return exceed;
     }
 }
