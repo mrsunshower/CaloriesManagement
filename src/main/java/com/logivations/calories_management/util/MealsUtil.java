@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import static com.logivations.calories_management.model.Meal.isBetween;
 import static java.util.stream.Collectors.*;
 
 /**
@@ -39,17 +40,13 @@ public class MealsUtil {
     private static List<MealWithExceed> getFilteredMealWithExceed(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = getCaloriesSumByDate(meals);
         return meals.stream()
-                .filter(isMealInTimeRange(startTime, endTime))
+                .filter(isBetween(startTime, endTime))
                 .map(meal -> new MealWithExceed(meal, isExceed(caloriesSumByDate, meal, caloriesPerDay)))
                 .collect(toList());
     }
 
     private static boolean isExceed(Map<LocalDate, Integer> caloriesSumByDate, Meal meal, int caloriesPerDay) {
         return caloriesSumByDate.getOrDefault(meal.getDate(), 0) > caloriesPerDay;
-    }
-
-    private static Predicate<Meal> isMealInTimeRange(LocalTime startTime, LocalTime endTime) {
-        return meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime);
     }
 
     private static Map<LocalDate, Integer> getCaloriesSumByDate(List<Meal> meals) {
