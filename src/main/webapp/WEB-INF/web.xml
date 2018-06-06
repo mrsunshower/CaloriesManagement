@@ -7,7 +7,7 @@
 
   <servlet>
     <servlet-name>userServlet</servlet-name>
-    <servlet-class>com.logivations.calories_management.web.UserServlet</servlet-class>
+    <servlet-class>com.fit.calories_management.web.UserServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
   <servlet-mapping>
@@ -17,7 +17,7 @@
 
   <servlet>
     <servlet-name>MealServlet</servlet-name>
-    <servlet-class>com.logivations.calories_management.web.MealServlet</servlet-class>
+    <servlet-class>com.fit.calories_management.web.MealServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
   <servlet-mapping>

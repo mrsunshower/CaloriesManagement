@@ -1,4 +1,4 @@
-package com.logivations.calories_management.model;
+package com.fit.calories_management.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,7 +35,7 @@ public class Meal {
         return dateTime.toLocalDate();
     }
 
-    public LocalTime getTime() {
+    private LocalTime getTime() {
         return dateTime.toLocalTime();
     }
 

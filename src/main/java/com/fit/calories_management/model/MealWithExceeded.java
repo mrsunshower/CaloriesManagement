@@ -1,15 +1,15 @@
-package com.logivations.calories_management.model;
+package com.fit.calories_management.model;
 
 /**
  * Created by KenTerror on 19.12.2017.
  */
-public class MealWithExceed {
+public class MealWithExceeded {
     private final Meal meal;
-    private final boolean exceed;
+    private final boolean exceeded;
 
-    public MealWithExceed(Meal meal, boolean exceed) {
+    public MealWithExceeded(Meal meal, boolean exceeded) {
         this.meal = meal;
-        this.exceed = exceed;
+        this.exceeded = exceeded;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class MealWithExceed {
                 "dateTime=" + meal.getDateTime() +
                 ", description='" + meal.getDescription() + '\'' +
                 ", calories=" + meal.getCalories() +
-                ", isExceed=" + exceed +
+                ", isExceed=" + exceeded +
                 '}';
     }
 
@@ -26,7 +26,7 @@ public class MealWithExceed {
         return meal;
     }
 
-    public boolean isExceed() {
-        return exceed;
+    public boolean isExceeded() {
+        return exceeded;
     }
 }

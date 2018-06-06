@@ -1,4 +1,4 @@
-package com.logivations.calories_management.web;
+package com.fit.calories_management.web;
 
 import org.slf4j.Logger;
 

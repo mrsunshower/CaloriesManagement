@@ -1,7 +1,7 @@
-package com.logivations.calories_management.util;
+package com.fit.calories_management.util;
 
-import com.logivations.calories_management.model.Meal;
-import com.logivations.calories_management.model.MealWithExceed;
+import com.fit.calories_management.model.Meal;
+import com.fit.calories_management.model.MealWithExceeded;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,9 +10,8 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 
-import static com.logivations.calories_management.model.Meal.isBetween;
+import static com.fit.calories_management.model.Meal.*;
 import static java.util.stream.Collectors.*;
 
 /**
@@ -20,12 +19,12 @@ import static java.util.stream.Collectors.*;
  */
 public class MealsUtil {
     public static void main(String[] args) {
-        List<MealWithExceed> filteredMealWithExceed = initAndGetMealsWithExceed();
+        List<MealWithExceeded> filteredMealWithExceed = initAndGetMealsWithExceed();
 
         filteredMealWithExceed.forEach(System.out::println);
     }
 
-    public static List<MealWithExceed> initAndGetMealsWithExceed() {
+    public static List<MealWithExceeded> initAndGetMealsWithExceed() {
         List<Meal> meals = Arrays.asList(
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Сніданок", 500),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обід", 1000),
@@ -37,15 +36,15 @@ public class MealsUtil {
         return getFilteredMealWithExceed(meals, LocalTime.MIN, LocalTime.MAX, 2000);
     }
 
-    private static List<MealWithExceed> getFilteredMealWithExceed(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    private static List<MealWithExceeded> getFilteredMealWithExceed(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = getCaloriesSumByDate(meals);
         return meals.stream()
                 .filter(isBetween(startTime, endTime))
-                .map(meal -> new MealWithExceed(meal, isExceed(caloriesSumByDate, meal, caloriesPerDay)))
+                .map(meal -> new MealWithExceeded(meal, isCaloriesPerDayExceeded(caloriesSumByDate, meal, caloriesPerDay)))
                 .collect(toList());
     }
 
-    private static boolean isExceed(Map<LocalDate, Integer> caloriesSumByDate, Meal meal, int caloriesPerDay) {
+    private static boolean isCaloriesPerDayExceeded(Map<LocalDate, Integer> caloriesSumByDate, Meal meal, int caloriesPerDay) {
         return caloriesSumByDate.getOrDefault(meal.getDate(), 0) > caloriesPerDay;
     }
 
