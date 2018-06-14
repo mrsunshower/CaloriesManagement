@@ -32,7 +32,7 @@
         </tr>
         </thead>
 
-        <c:forEach var="meal" items="${meals}">
+        <c:forEach var="meal" items="${requestScope.meals}">
             <jsp:useBean id="meal" type="com.fit.calories_management.model.MealWithExceeded"/>
             <tr class="${meal.exceeded ? 'exceeded' : 'normal'}">
                 <td>
