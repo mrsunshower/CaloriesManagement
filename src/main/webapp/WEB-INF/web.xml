@@ -25,14 +25,4 @@
     <url-pattern>/meals</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>WelcomeServlet</servlet-name>
-    <servlet-class>com.fit.calories_management.web.WelcomeServlet</servlet-class>
-    <load-on-startup>0</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WelcomeServlet</servlet-name>
-    <url-pattern>/welcome</url-pattern>
-  </servlet-mapping>
-
 </web-app>
